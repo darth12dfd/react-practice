@@ -1,3 +1,4 @@
+//1. App 컴포넌트를 사용하면서 화면 구성하기
 //필수 리액트 구동 모듈들이다.
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -16,7 +17,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-//만약 App 컴포넌트를 사용하지 않는다면 아래와 같이 수정한다.
+//2. 만약 App 컴포넌트를 사용하지 않는다면 아래와 같이 수정한다.
 
 /*
 var img = document.createElement('img');
@@ -30,3 +31,5 @@ welcomeEl.append(divEl);
 var root = document.getElementById('root');
 root.append(welcomeEl);
 */
+
+//1번과 2번 모두 같은 화면을 만들지만 2번의 경우 코드가 더욱 복잡하다. 따라서 컴포넌트를 활용한 1번 방식으로 코드를 작성한다.
