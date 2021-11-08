@@ -16,7 +16,6 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-
 //만약 App 컴포넌트를 사용하지 않는다면 아래와 같이 수정한다.
 
 /*
