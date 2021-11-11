@@ -2,7 +2,7 @@
 //버튼을 누를 때 숫자가 증가하는 카운터 컴포넌트
 import React from 'react';
 
-class Counter extends React.Component {
+class CounterEx extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,4 +24,4 @@ class Counter extends React.Component {
   }
 }
 
-export default Counter;
+export default CounterEx;
