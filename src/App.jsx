@@ -138,6 +138,7 @@ export default App;
 
 //자식 프로퍼티 사용하기
 //App 컴포넌트에 포함시킨 ChildProperty 컴포넌트 하위에 자식 노드를 배치한다.
+/*
 import React from 'react';
 import ChildProperty from './03/ChildProperty';
 
@@ -157,3 +158,40 @@ class App extends React.Component {
 
 export default App;
 //결과를 확인해보면 ChildProperty 컴포넌트에 있는 {this.props.children} 위치에 <div><span>자식노드</span></div>가 출력된다.
+*/
+
+//03-4. 컴포넌트 상태 관리하기
+
+//StateExample 컴포넌트 화면에 그리기
+/*
+import React from 'react';
+import StateExample from './03/StateExample';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <StateExample />
+      </div>
+    );
+  }
+}
+
+export default App;
+*/
+
+//forceUpdateExample 컴포넌트 화면에 그리기
+import React from 'react';
+import ForceUpdateExample from './03/ForceUpdateExample';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <ForceUpdateExample />
+      </div>
+    );
+  }
+}
+
+export default App;
