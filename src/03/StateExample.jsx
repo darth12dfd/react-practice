@@ -80,6 +80,6 @@ export default StateExample;
         this.setState(prevState => ({
             loading: false,
             formData: data + prevState.formData
-        }))
+        });
     }
 */
