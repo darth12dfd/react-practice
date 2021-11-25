@@ -288,6 +288,7 @@ export default App;
 
 //TodoList 컴포넌트 화면에 그리기
 
+/*
 import React from 'react';
 import TodoList from './03/TodoList';
 
@@ -296,6 +297,97 @@ class App extends React.Component {
     return (
       <div className="body">
         <TodoList />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+*/
+
+//03-9 컴포넌트에서 콜백함수와 이벤트 처리하기
+
+/*
+    프로퍼티를 사용하면 상위 컴포넌트의 데이터를 하위 컴포넌트에 전달할 수 있다. 그렇기에 하위 컴포넌트에서 프로퍼티를 변경할 때는 프로퍼티 원본을 수정할 수 있는 함수를 하위 컴포넌트에 제공하면 된다.
+    콜백 함수란 정의된 위치에서 실행되지 않고, 이후 특정 상황(이벤트, 다른 함수 호출 등)에서 실행되는 함수를 말한다. 즉, 콜백 함수를 프로퍼티로 전달하면 된다.
+*/
+
+//콜백 함수로 프로퍼티 수정해보기
+/*
+import React from 'react';
+import Counter2 from './03/Counter2';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      count: 1,
+    };
+  }
+
+  increaseCount() {
+    this.setState(({ count }) => ({ count: count + 1 }));
+  }
+
+  render() {
+    return <Counter2 count={this.state.count} onAdd={this.increaseCount} />;
+  }
+}
+
+export default App;
+*/
+
+//위의 코드로 작성한 뒤 [카운트 증가]를 눌러도 제대로 작동되지 않는데 콘솔창을 열어보면, 아래와 같은 오류 메시지가 뜬다.
+
+//Uncaught TypeError: this.setState is not a function
+
+/*
+  이 오류메시지는 Counter2 컴포넌트에서 프로퍼티로 받아 실행한 onAdd() 함수에서 참조하는 this의 범위 때문에 발생한 것이다.
+  onAdd() 함수에 구현되어 있는 this.setState()는 상위 컴포넌트에 정의되어 있는데 하위 컴포넌트(Counter2)에서 실행되기 때문이다.
+  이렇게 콜백 함수를 프로퍼티 데이터로 전달하는 경우에는 하위 컴포넌트에서 참조할 this 범위에 대한 오류를 주의해야 한다. 이문제는 bind() 함수로 해결하면 된다.
+*/
+
+//bind() 함수로 this 범위 오류 해결하기
+
+/*
+import React from 'react';
+import Counter2 from './03/Counter2';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      count: 1,
+    };
+  }
+
+  increaseCount() {
+    this.setState(({ count }) => ({ count: count + 1 }));
+  }
+
+  render() {
+    return <Counter2 count={this.state.count} onAdd={this.increaseCount.bind(this)} />;
+    //increaseCount() 함수가 호출되는 this 범위가 App 컴포넌트에 묶인 것이다.
+  }
+}
+
+export default App;
+
+*/
+
+//Counter3 컴포넌트 화면에 그리기
+
+import React from 'react';
+import Counter3 from './03/Counter3';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Counter3 />
       </div>
     );
   }
