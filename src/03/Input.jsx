@@ -14,7 +14,7 @@ class Input extends PureComponent {
   handleChange(e) {
     const { name, onChange } = this.props;
     if (onChange) {
-      onChange(name, e.targt.value);
+      onChange(name, e.target.value);
     }
   }
 
