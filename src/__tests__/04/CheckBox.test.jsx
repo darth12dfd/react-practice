@@ -16,7 +16,7 @@ describe('<CheckBox>', () => {
 
   it('displays errorMessage', () => {
     const errorMessage = '오류 메시지';
-    const errorHtml = shallow(<CheckBox name="required" errorMessage={errorMessage}>테스트</CheckBox>).dive('div').dive('input').html();
+    const errorHtml = shallow(<CheckBox name="required" errorMessage={errorMessage}>테스트</CheckBox>).dive('input').html();
     expect(errorHtml).toContain(errorMessage);
   });
 
@@ -24,7 +24,7 @@ describe('<CheckBox>', () => {
     const changeStub = jest.fn();
     expect(changeStub).toHaveBeenCalledTimes(0);
 
-    const input = shallow(<CheckBox name="test_name" onChange ={ changeStub }>테스트</CheckBox>).dive('div').dive('input');
+    const input = shallow(<CheckBox name="test_name" onChange ={ changeStub }> 테스트 </CheckBox>).dive('input');
     expect(input).toHaveLength(1);
 
     input.simulate('click', { target: { checked: true } });
