@@ -27,11 +27,13 @@ describe('<CheckBox>', () => {
     const input = shallow(<CheckBox name="test_name" onChange ={ changeStub }> 테스트 </CheckBox>).dive('input');
     expect(input).toHaveLength(1);
 
-    input.simulate('click', { target: { checked: true } });
+    //input.simulate('click', { target: { checked: true } });
+    input.props().onChange('test_name',true);
     expect(changeStub).toHaveBeenCalledTimes(1);
     expect(changeStub).toHaveBeenCalledWith('test_name', true);
 
-    input.simulate('click', { target: { checked: false } });
+    //input.simulate('click', { target: { checked: false } });
+    input.props().onChange('test_name',false);
     expect(changeStub).toHaveBeenCalledWith('test_name', false);
   });
 });
