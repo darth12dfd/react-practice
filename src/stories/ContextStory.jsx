@@ -9,7 +9,9 @@ import  { storiesOf } from '@storybook/react';
 
 import HomePageComponent from "../06/HomePageComponent";
 import HomePageWithProvider from '../06/HomePageWithProvider';
+import HomePageWithTwoProvider from '../06/HomePageWithTwoProvider';
 
 storiesOf('HomePageComponent', module)
     .addWithJSX('컨텍스트 예제', () => <HomePageComponent />)
-    .addWithJSX('Provider 예제', () => <HomePageWithProvider/>);
+    .addWithJSX('Provider 예제', () => <HomePageWithProvider/>)
+    .addWithJSX('이중 Provider 예제', () => <HomePageWithTwoProvider/>);//06-2에서 커링으로 중복 공급자 문제 해결하는 코드를 스토리로 보여준다.
