@@ -9,6 +9,9 @@ import AdvReduxApp02 from '../07/AdvReduxApp02';
 import AdvReduxApp03 from '../07/AdvReduxApp03';
 import AdvReduxApp04 from '../07/AdvReduxApp04';
 import AdvReduxApp05 from '../07/AdvReduxApp05';
+import AdvReduxApp06 from '../07/AdvReduxApp06';
+import AdvReduxApp07 from '../07/AdvReduxApp07';
+import AdvReduxApp08 from '../07/AdvReduxApp08';
 
 storiesOf('ReduxApp', module)
   .addWithJSX('기본 스토어 설정', () => <ReduxApp01 />)
@@ -18,4 +21,7 @@ storiesOf('ReduxApp', module)
   .addWithJSX('액션 분리하기',() => <AdvReduxApp02 />)
   .addWithJSX('배열 액션 호출하기', () => <AdvReduxApp03 />)
   .addWithJSX('스토어 읽어들이기', () => <AdvReduxApp04 />)
-  .addWithJSX('그래프 DB 수정하기', () => <AdvReduxApp05 />);
+  .addWithJSX('그래프 DB 수정하기', () => <AdvReduxApp05 />)
+  .addWithJSX('데이터 컴포넌트 출력하기',() => <AdvReduxApp06 />)
+  .addWithJSX('데이터 컴포넌트 액션 예제', () => <AdvReduxApp07 />)
+  .addWithJSX('데이터 컴포넌트 전체 액션 예제', () => <AdvReduxApp08 />);
