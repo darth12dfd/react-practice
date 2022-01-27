@@ -11,9 +11,11 @@
 import loading from './loadingReducer';
 import user from './userReducer';
 import collection from './collectionReducer';////7-3-3-3. 리듀서 추가하고 그래프 DB 수정 확인하기
+import searchFilter from './searchFilterReducer';////7-5-1-3. 리듀서를 스토어에 추가하기
 
 export default {
     collection,
     loading,
     user,
+    searchFilter,
 };
