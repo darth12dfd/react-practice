@@ -6,14 +6,17 @@
 
 ///08-3-1-3. CoinApp 컴포넌트 만들기
 
+///09-5-1-3. 가상 코인 거래소에 모달 공급자 추가하기
+
 import React, { PureComponent } from 'react';
 import { Provider } from 'react-redux';
 
 import AppLayout from './components/AppLayout';
 import MainPage from './components/main/MainPage';
 //import CoinOverview from './components/main/CoinOverview';
-import TransactionList from './components/main/TransactionList';
+//import TransactionList from './components/main/TransactionList';
 import configureStore from './store/configureStore';
+import ModalProvider from './ModalProvider';
 
 class CoinApp extends PureComponent {
     store = configureStore();
@@ -21,9 +24,11 @@ class CoinApp extends PureComponent {
     render(){
         return (
             <Provider store={this.store}>
-                <AppLayout>
-                    <MainPage />
-                </AppLayout>
+                <ModalProvider>
+                    <AppLayout>
+                        <MainPage />
+                    </AppLayout>
+                </ModalProvider>
             </Provider>
         );
     }
