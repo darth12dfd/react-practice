@@ -17,6 +17,7 @@
 */  
 
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import InlineList from '../../../doit-ui/InlineList';
 import Button from '../../../doit-ui/Button';
@@ -26,10 +27,29 @@ import Form from '../../../doit-ui/Form';
 
 import Select, { Option } from '../../../doit-ui/Select';
 
+import Api from '../../Api';
+//import { propTypes } from '../../../doit-ui/Spacing';
+
 class TransactionSearchFilter extends PureComponent {
+
+    ///09-4-2-3. 리덕스 스토어 데이터 변경하기
+
+    /*
+        Form 컴포넌트에서 onSubmit 이벤트가 발생하면 this.handleSubmit() 함수가 호출되고 이어서 setTransactionList() 액션 함수가 호출될 것이다.
+    */
+    constructor(props){
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(params){
+        const { setTransactionList } = this.props;
+        Api.get('./transactions', { params }).then(({ data }) => setTransactionList(data));
+    }
+
     render(){
-        return (
-            <Form onSubmit = {values => console.log(values)}>
+        return (//09-4-1. 검색요청 기능 완성하기
+            <Form onSubmit = {this.handleSubmit}>
                 <Form.Consumer>
                     {({ onChange, values }) => (
                         <InlineList spacingBetween={2} verticalAlign = "bottom">
@@ -38,7 +58,7 @@ class TransactionSearchFilter extends PureComponent {
                             </Text>
                             <Select
                                 name="code"
-                                labe="코인 코드"
+                                label="코인 코드"
                                 onChange={onChange}
                                 value={values['code']}
                                 >
@@ -46,18 +66,19 @@ class TransactionSearchFilter extends PureComponent {
                                 <Option label = "비트코인(BTX)" value = "BTX" />
                                 <Option label = "이더리움(ETH)" value = "ETF" />
                                 <Option label = "두잇코인(DOIT)" value = "DOIT" />
+                                
                             </Select>
                             <Input
-                                name="minAmount"
+                                name="currentPrice_gte"
                                 label="최소 거래가"
                                 onChange={onChange}
-                                value={values['minAmount']}
+                                value={values['currentPrice_gte']}
                                 />
                             <Input
-                                name="maxAmount"
+                                name="currentPrice_lte"
                                 label="최대 거래가"
                                 onChange={onChange}
-                                value={values['maxAmount']}
+                                value={values['currentPrice_lte']}
                                 />
                             <Button type="submit" primary >
                                 검색
@@ -70,6 +91,6 @@ class TransactionSearchFilter extends PureComponent {
     }
 }
 
-TransactionSearchFilter.propTypes = {};
+TransactionSearchFilter.propTypes = { setTransactionList: PropTypes.func };
 
 export default TransactionSearchFilter;

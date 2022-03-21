@@ -21,7 +21,9 @@ import Heading from '../../../doit-ui/Heading';
 import Card from '../../../doit-ui/Card';
 import Api from '../../Api';
 
-import TransactionSearchFilter from './TransactionSearchFilter';
+///09-4-2-2. TransactionList 컴포넌트 수정하기
+//import TransactionSearchFilter from './TransactionSearchFilter';
+import TransactionSearchFilterContainer from '../../containers/main/TransactionSearchFilterContainer';
 import TransactionTable from './TransactionTable';
 
 class TransactionList extends PureComponent {
@@ -36,7 +38,7 @@ class TransactionList extends PureComponent {
             <div>
                 <Heading level={3}>거래 현황</Heading>
                 <Card vertical={4} horizontal={4}>
-                    <TransactionSearchFilter />
+                    <TransactionSearchFilterContainer />
                 </Card>
                 <Card>
                     <TransactionTable transactions={transactions} />
