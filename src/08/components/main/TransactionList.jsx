@@ -19,17 +19,27 @@
 import React, { PureComponent } from 'react';
 import Heading from '../../../doit-ui/Heading';
 import Card from '../../../doit-ui/Card';
-import Api from '../../Api';
+//import Api from '../../Api';
 
 ///09-4-2-2. TransactionList 컴포넌트 수정하기
 //import TransactionSearchFilter from './TransactionSearchFilter';
 import TransactionSearchFilterContainer from '../../containers/main/TransactionSearchFilterContainer';
 import TransactionTable from './TransactionTable';
 
+
+///10-2-3-5. 액션 함수로 호출하기
+
+/*
+    TransactionList 컴포넌트에서 Api 함수가 아닌 프로퍼티 requestTransactionList() 함수를 호출하도록 수정한다.
+
+    componentDidMount() 함수에서 requestTransactionList() 함수를 호출하도록 코드를 변경한다.
+
+    이렇게 바꿈으로서 서버 데이터 호출 정보를 포함했던 코드가 사라져 간결해졌으며, 거래 목록 정보를 요청하는 Api 코드를 액션에 담아 공유할 수도 있게 되었다.
+*/
 class TransactionList extends PureComponent {
     componentDidMount(){
-        Api.get('/transactions')
-            .then(({ data }) => this.props.setTransactionList(data));
+        //Api.get('/transactions').then(({ data }) => this.props.setTransactionList(data));
+        this.props.requestTransactionList();//
     }
 
     render() {
@@ -50,7 +60,7 @@ class TransactionList extends PureComponent {
 
 TransactionList.defaultProps ={
     transactions: [],
-    setTransactionList: () => {},
+    requestTransactionList: () => {},
 };
 
 export default TransactionList;

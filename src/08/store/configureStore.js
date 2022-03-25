@@ -9,12 +9,14 @@
 ///09-3-1-4. 스토어 설정 파일 추가하기
 
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { SET_TRANSACTION_LIST } from '../actions/transactionActions';
+//import { SET_TRANSACTION_LIST } from '../actions/transactionActions';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from '../reducers';
+import thunk from 'redux-thunk';
 
 //10-1-1-2. 간단한 미들웨어 만들어 적용하기
 
+/*
 const customMiddleware = store => nextRunner => action => {
     console.log('미들웨어에 전달된 액션 개체',action);//nextRunner() 함수 이전에 실행할 작업 1
     console.log('리듀서 실행 전',store.getState());//nextRunner() 함수 이전에 실행할 작업 2
@@ -22,6 +24,8 @@ const customMiddleware = store => nextRunner => action => {
     console.log('리듀서 실행 후',store.getState());
     return result;
 }
+*/
+
 //10-1-2. 미들웨어로 액션 변형하기
 
 ///10-1-2-1. 특정 액션의 payload 값 변경하기
@@ -29,6 +33,7 @@ const customMiddleware = store => nextRunner => action => {
     액션의 type이 SET_TRANSACTION_LIST 인경우 payload의 값을 변경하는 미들웨어이다.
 */
 
+/*
 const customMiddleware1 = () => nextRunner => action => {
     if(action.type === SET_TRANSACTION_LIST){
         return nextRunner({
@@ -46,7 +51,9 @@ const customMiddleware1 = () => nextRunner => action => {
 
     return nextRunner(action);
 }
+*/
 
+/*
 const customMiddleware2 = store => nextRunner => action => {
     console.log('미들웨어2 전달된 액션 개체',action);
     console.log('미들웨어2 실행 전',store.getState());
@@ -54,11 +61,9 @@ const customMiddleware2 = store => nextRunner => action => {
     console.log('미들웨어2 살행 후',store.getState());
     return result;
 }
-
+*/
 export default initStates => createStore(
     combineReducers(reducers),
     initStates,
-    composeWithDevTools(
-        applyMiddleware(customMiddleware,customMiddleware2)
-    ),
+    composeWithDevTools(applyMiddleware(thunk)),//redux-thunk 미들웨어 추가하기
 );
