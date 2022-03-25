@@ -12,26 +12,53 @@
     거래 목록 정보를 그래프 DB 구조로 저장한다.
 */
 
-import { SET_TRANSACTION_LIST } from "../actions/transactionActions";
+import { LOADING_TRANSACTION_LIST, SET_TRANSACTION_LIST, SET_ERROR, } from "../actions/transactionActions";
 
 const initState = {
     ids: [],
     entities: {},
+    loading: false,//state 초깃값에 loading을 추가한다.
+    hasError: false,
 };
 
 export default ( state = initState, action) => {
     const { type, payload } = action;
 
+    ////10-3-1-2. 로딩 상태 저장하도록 리듀서 변경하기
     switch(type){
+        case SET_ERROR: {
+            const { errorMessage } = payload;
+            return{
+                ...state,
+                loading: false,
+                hasError: true,
+                errorMessage,
+            }
+        }
+
+        case LOADING_TRANSACTION_LIST: {
+            return {
+                ...state,
+                loading: true,//LOADING_TRANSACTION_LIST 액션이 들어오면 loading을 true로 변경한다.
+                hasError: false,
+            }
+        }
+
         case SET_TRANSACTION_LIST: {
             const ids = payload.map(entity => entity['id']);
             const entities = payload.reduce((finalEntities, entity) => ({
                 ...finalEntities,
                 [entity['id']]: entity,
             }), {});
-            return { ...state, ids, entities };
+            return { ...state, ids, entities, loading: false, hasError: false };//기존의 SET_TRANSACTION_LIST 액션이 들어오면 loading을 false로 변경한다.
         }
         default:
             return state;
     }
 };
+
+/*
+    리듀서의 코드를 보면 오류 상태를 표시하기 위한 hasError 가 추가되었으며, 각 액션에서 hasError를 적절히 바꾸도록 코드를 구성한다.
+
+    SET_ERROR 액션 type에는 에러 메시지를 출력하기 위한 errorMessage도 추가한다.
+*/

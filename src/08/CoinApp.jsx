@@ -17,6 +17,9 @@ import MainPage from './components/main/MainPage';
 //import TransactionList from './components/main/TransactionList';
 import configureStore from './store/configureStore';
 import ModalProvider from './ModalProvider';
+import NotificationContainer from './containers/main/NotificationContainer';
+import CoinOverview from './components/main/CoinOverview';
+import TransactionListContainer from './containers/main/TransactionListContainer';
 
 class CoinApp extends PureComponent {
     store = configureStore();
@@ -26,7 +29,9 @@ class CoinApp extends PureComponent {
             <Provider store={this.store}>
                 <ModalProvider>
                     <AppLayout>
-                        <MainPage />
+                        <CoinOverview />
+                        <TransactionListContainer />
+                        <NotificationContainer />
                     </AppLayout>
                 </ModalProvider>
             </Provider>

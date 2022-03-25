@@ -37,7 +37,9 @@ export function setTransactionList(transactions) {
     그렇기에 Api.get(...) 이후에 dispatch() 를 호출할 수 있다. 즉, 액션에 필요한 지연 작업을 포함할 수 있게 된다.
 */
 
+/*
 import Api from "../Api";
+
 
 export const SET_TRANSACTION_LIST = 'transaction/SET_TRANSACTION_LIST';
 
@@ -55,4 +57,54 @@ export function requestTransactionList(params){
         Api.get('/transactions', { params }).then(
             ({ data }) => dispatch(setTransactionList(data))
         );
+}
+*/
+
+//10-3. 서버 지연 처리와 오류 표시하기
+
+/*
+    서버에서 데이터를 처리하고 돌려주는 과정에는 시간이 많이 필요하다. 가끔은 서버의 오류로 데이터를 전달받지 못하는 경우도 있다.
+
+    그렇기에 실무에서는 사용자가 서버의 처리나, 서버의 오류를 인지할 수 있도록 지연 또는 오류 상태를 알려주는 화면을 개발한다.
+
+    여기서는 리덕스를 활용하여 지연 또는 오류에 대한 정보를 알려주는 화면 출력 방법을 알아본다.
+*/
+
+///10-3-1. 서버 지연 상태 알려주기
+
+////10-3-1-1. 로딩 상태 변경 액션 추가하기
+
+import Api from '../Api';
+export const LOADING_TRANSACTION_LIST = 'transaction/LOADING_TRANSACTION_LIST';
+export const SET_TRANSACTION_LIST = 'transaction/SET_TRANSACTION_LIST';
+export const SET_ERROR = 'transaction/SET_ERROR';
+
+export function setTransactionList(transactions){
+    return{
+        type: SET_TRANSACTION_LIST,
+        payload: transactions,
+    };
+}
+
+export function requestTransactionList(params){
+    return dispatch =>{
+        dispatch(loading());//loading 액션 함수를 이 안에서 dispatch(loading())과 같이 호출하도록 변경한다.
+        Api.get('/transactions', { params }).then(
+            ({ data }) => dispatch(setTransactionList(data)),
+            error => dispatch(setError(error.response.data.errorMessage)),
+        );
+    }
+}
+
+export function loading(){
+    return{
+        type: LOADING_TRANSACTION_LIST,
+    };
+}
+
+export function setError(errorMessage) {
+    return {
+        type: SET_ERROR,
+        payload: { errorMessage },
+    }
 }
