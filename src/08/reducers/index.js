@@ -9,7 +9,9 @@
 ///09-3-1-3. 리듀서 index.js 파일에 리듀서 추가하기
 
 import transactions from './transactionsReducer';
+import notification from './notificationReducer';
 
 export default {
+    notification,//10-4-1-2. 스토어에 알람 리듀서 추가한다.
     transactions,
 };

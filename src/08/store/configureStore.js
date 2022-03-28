@@ -14,6 +14,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from '../reducers';
 import thunk from 'redux-thunk';
 
+import notificationEffects from '../middlewares/notificationEffects';
+
 //10-1-1-2. 간단한 미들웨어 만들어 적용하기
 
 /*
@@ -65,5 +67,5 @@ const customMiddleware2 = store => nextRunner => action => {
 export default initStates => createStore(
     combineReducers(reducers),
     initStates,
-    composeWithDevTools(applyMiddleware(thunk)),//redux-thunk 미들웨어 추가하기
+    composeWithDevTools(applyMiddleware(thunk, notificationEffects)),//redux-thunk 미들웨어 추가하기
 );

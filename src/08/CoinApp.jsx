@@ -17,7 +17,7 @@ import MainPage from './components/main/MainPage';
 //import TransactionList from './components/main/TransactionList';
 import configureStore from './store/configureStore';
 import ModalProvider from './ModalProvider';
-import NotificationContainer from './containers/main/NotificationContainer';
+import NotificationContainer from './containers/NotificationContainer';
 import CoinOverview from './components/main/CoinOverview';
 import TransactionListContainer from './containers/main/TransactionListContainer';
 

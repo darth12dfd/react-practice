@@ -75,6 +75,7 @@ export function requestTransactionList(params){
 ////10-3-1-1. 로딩 상태 변경 액션 추가하기
 
 import Api from '../Api';
+import { showMessage } from './notificationActions';
 export const LOADING_TRANSACTION_LIST = 'transaction/LOADING_TRANSACTION_LIST';
 export const SET_TRANSACTION_LIST = 'transaction/SET_TRANSACTION_LIST';
 export const SET_ERROR = 'transaction/SET_ERROR';
@@ -91,7 +92,10 @@ export function requestTransactionList(params){
         dispatch(loading());//loading 액션 함수를 이 안에서 dispatch(loading())과 같이 호출하도록 변경한다.
         Api.get('/transactions', { params }).then(
             ({ data }) => dispatch(setTransactionList(data)),
-            error => dispatch(setError(error.response.data.errorMessage)),
+            error => {
+                dispatch(setError(error.response.data.errorMessage));
+                //dispatch(showMessage(error.response.data.errorMessage, true));
+            },
         );
     }
 }
