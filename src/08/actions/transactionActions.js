@@ -112,3 +112,30 @@ export function setError(errorMessage) {
         payload: { errorMessage },
     }
 }
+
+//10-5. 코인 거래 알림 효과 추가하며 마무리하기
+
+/*
+    코인 거래 기능에 오류 메시지 뿐 아니라 코인 거래 처리 과정을 알려주는 메시지를 알림창에 표시한ㄷ. 
+*/
+
+///10-5-1. 코인 거래 처리 과정 메시지 알림창에 표시하기
+
+////10-5-1-1. 거래 요청 액션 추가하기
+
+export const TRADE_COMPLETE = 'transaction/TRADE_COMPLETE';
+
+export function tradeComplete() {
+    return { type: TRADE_COMPLETE };
+}
+
+export function createTransaction(data, onComplete) {
+    return dispatch =>
+      Api.post('/transactions', data).then(
+        ({ data }) => {
+          dispatch(tradeComplete());
+          onComplete();
+        },
+        error => dispatch(setError(error.response.data.errorMessage)),
+      );
+  }
