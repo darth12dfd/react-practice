@@ -65,8 +65,19 @@ const customMiddleware2 = store => nextRunner => action => {
     return result;
 }
 */
+
+//11-1. redux-pack 미들웨어로 비동기 제어하기
+
+///11-1-1. 가상 코인 거래소에 redux-pack 적용하기
+
+////11-1-1-1. redux-pack 스토어 설정 파일에 추가하기
+
+import { middleware as reduxPackMiddleware } from 'redux-pack';
+
 export default initStates => createStore(
     combineReducers(reducers),
     initStates,
-    composeWithDevTools(applyMiddleware(thunk, notificationEffects, transactionEffects)),//redux-thunk 미들웨어 추가하기
+    composeWithDevTools(
+        applyMiddleware(thunk, reduxPackMiddleware,notificationEffects,transactionEffects),
+    ),
 );
