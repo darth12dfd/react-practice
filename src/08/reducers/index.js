@@ -10,8 +10,10 @@
 
 import transactions from './transactionsReducer';
 import notification from './notificationReducer';
+import searchFilter from './searchFilterReducer';
 
 export default {
     notification,//10-4-1-2. 스토어에 알람 리듀서 추가한다.
     transactions,
+    searchFilter,
 };

@@ -47,11 +47,12 @@ class TransactionSearchFilter extends PureComponent {
         const { setTransactionList } = this.props;
         Api.get('./transactions', { params }).then(({ data }) => setTransactionList(data));
         */
-       const { requestTransactionList } = this.props;
+       const { requestTransactionList, setFilter } = this.props;
        const cleanedParmas = Object.entries(params)
-        .filter(([key,value]) => value !== '선택해주세요')
-        .reduce((obj, [key,value]) => ({ ...obj, [key]: value }) , {});
-       requestTransactionList(cleanedParmas);
+        .filter(entries => entries[1] !== '')
+        .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+        requestTransactionList(cleanedParmas);
+        setFilter(cleanedParmas);
     }
 
     render(){
@@ -71,7 +72,7 @@ class TransactionSearchFilter extends PureComponent {
                                 >
                                 <Option label = "선택해주세요" />
                                 <Option label = "비트코인(BTX)" value = "BTX" />
-                                <Option label = "이더리움(ETH)" value = "ETF" />
+                                <Option label = "이더리움(ETH)" value = "ETH" />
                                 <Option label = "두잇코인(DOIT)" value = "DOIT" />
                                 
                             </Select>
@@ -97,6 +98,8 @@ class TransactionSearchFilter extends PureComponent {
         );
     }
 }
+
+TransactionSearchFilter.propTypes = { setFilter: PropTypes.func };
 
 //TransactionSearchFilter.propTypes = { setTransactionList: PropTypes.func };
 TransactionSearchFilter.propTypes = { requestTransactionList: PropTypes.func };

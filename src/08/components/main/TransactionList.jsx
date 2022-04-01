@@ -26,6 +26,7 @@ import Card from '../../../doit-ui/Card';
 import TransactionSearchFilterContainer from '../../containers/main/TransactionSearchFilterContainer';
 import TransactionTable from './TransactionTable';
 
+import TransactionPaginationContainer from '../../containers/main/TransactionPaginationContainer';
 
 ///10-2-3-5. 액션 함수로 호출하기
 
@@ -53,6 +54,7 @@ class TransactionList extends PureComponent {
                 <Card>
                     <TransactionTable transactions={transactions} isLoading={loading} />
                 </Card>
+                <TransactionPaginationContainer />
             </div>
         );
     }

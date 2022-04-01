@@ -26,5 +26,6 @@ import { connect } from 'react-redux';
 import TransactionSearchFilter from '../../components/main/TransactionSearchFilter';
 //import { requestTransactionList } from '../../actions/transactionActions';
 import { requestTransactionList } from '../../actions/transactionPackActions';
+import { setFilter } from '../../actions/searchFilterActions';//11-2-3-2. 데이터 컴포넌트 수정하기
 
-export default connect(null, { requestTransactionList })(TransactionSearchFilter);
+export default connect(null, { requestTransactionList, setFilter })(TransactionSearchFilter);
