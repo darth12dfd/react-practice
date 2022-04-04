@@ -13,3 +13,4 @@
 ///09-5-1-2. 모달 공급자 컴포넌트 생성하기
 
 export const TRADE_COIN_MODAL = 'modal/TRADE_COIN_MODAL';
+export const REGISTER_USER_MODAL = 'modal/REGISTER_USER_MODAL';//11-5-7. 모달 본문 추가하기

@@ -68,6 +68,7 @@ const createData = (index) => {
 
 module.exports = function() {
     return{
+        users: [],//11-5. 회원 가입 기능 추가( json-server에 users 정보 추가하기)
         transactions: Array(100).fill('').map((_, index) => createData(index)),
     };
 };
