@@ -10,16 +10,16 @@
 
 import React, { PureComponent } from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';//12-1-1.Route 컴포넌트 사용하기
 
 import AppLayout from './components/AppLayout';
 import MainPage from './components/main/MainPage';
-//import CoinOverview from './components/main/CoinOverview';
-//import TransactionList from './components/main/TransactionList';
 import configureStore from './store/configureStore';
 import ModalProvider from './ModalProvider';
 import NotificationContainer from './containers/NotificationContainer';
-import CoinOverview from './components/main/CoinOverview';
-import TransactionListContainer from './containers/main/TransactionListContainer';
+import NotFound from './components/NotFound';
+//import CoinOverview from './components/main/CoinOverview';
+//import TransactionListContainer from './containers/main/TransactionListContainer';
 
 class CoinApp extends PureComponent {
     store = configureStore();
@@ -27,13 +27,17 @@ class CoinApp extends PureComponent {
     render(){
         return (
             <Provider store={this.store}>
-                <ModalProvider>
-                    <AppLayout>
-                        <CoinOverview />
-                        <TransactionListContainer />
-                        <NotificationContainer />
-                    </AppLayout>
-                </ModalProvider>
+                <Router>
+                    <ModalProvider>
+                        <AppLayout>
+                            <Routes>
+                                <Route path ="/" element = {<MainPage />} />
+                                <Route path ="*" element = {<NotFound />} />
+                            </Routes>
+                            <NotificationContainer />
+                        </AppLayout>
+                    </ModalProvider>
+                </Router>
             </Provider>
         );
     }
