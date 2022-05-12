@@ -22,7 +22,7 @@
 
 ///09-2-2-5. 자주 사용하는 API 프로젝트에 등록하기
 
-import axios from 'axios';
+import axios from "axios";
 
 const Api = axios.create({
     baseURL: 'http://localhost:4000/',

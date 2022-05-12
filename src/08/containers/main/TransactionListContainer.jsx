@@ -12,7 +12,7 @@
     containers 폴더에 컴포넌트와 동일한 방법을 폴더를 추가하여 데이터 컴포넌트를 관리한다.
 */
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import TransactionList from '../../components/main/TransactionList';
 //import { setTransactionList } from '../../actions/transactionActions';
 //import { requestTransactionList } from '../../actions/transactionActions';

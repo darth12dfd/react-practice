@@ -12,10 +12,13 @@
 import notification from './notificationReducer';
 import searchFilter from './searchFilterReducer';
 import createReducers from '../../11/api-redux-pack/createReducers';//11-4-2-2. 리듀서 설정 파일 수정하기
+import router from './routerReducer';
 
 const apiReducers = createReducers('transactions', 'users');//11-5-3. users 리듀서 추가하기
+
 export default {
     ...apiReducers,
     notification,//10-4-1-2. 스토어에 알람 리듀서 추가한다.
     searchFilter,
+    router,
 };
