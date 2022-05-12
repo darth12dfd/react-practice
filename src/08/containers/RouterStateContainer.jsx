@@ -32,4 +32,4 @@ RouterState.propTypes = {
     location: PropTypes.object,
 };
 
-export default compose(connect(null, { setLocation }),withRouter)(RouterState);
+export default compose(connect(null, { setLocation }), withRouter)(RouterState);
