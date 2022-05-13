@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { setLocation } from "../actions/routerActions";
 import { withRouter } from 'react-router';
 import compose from 'recompose/compose';
+import { BrowserRouter } from "react-router-dom";
 
 class RouterState extends React.PureComponent {
     componentDidMount(){
@@ -33,3 +34,8 @@ RouterState.propTypes = {
 };
 
 export default compose(connect(null, { setLocation }), withRouter)(RouterState);
+
+/*
+const Connection = (connect(null, { setLocation }))(RouterState);
+export default <BrowserRouter>{ withRouter(Connection) }</BrowserRouter>;
+*/

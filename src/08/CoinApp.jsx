@@ -18,6 +18,7 @@ import ModalProvider from './ModalProvider';
 import NotificationContainer from './containers/NotificationContainer';
 import NotFound from './components/NotFound';
 import RouterStateContainer from './containers/RouterStateContainer';
+
 //import CoinOverview from './components/main/CoinOverview';
 //import TransactionListContainer from './containers/main/TransactionListContainer';
 
