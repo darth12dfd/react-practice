@@ -8,9 +8,8 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { setLocation } from "../actions/routerActions";
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import compose from 'recompose/compose';
-import { BrowserRouter } from "react-router-dom";
 
 class RouterState extends React.PureComponent {
     componentDidMount(){

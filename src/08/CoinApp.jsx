@@ -10,7 +10,7 @@
 
 import React, { PureComponent } from 'react';
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';//12-1-1.Route 컴포넌트 사용하기
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';//12-1-1.Route 컴포넌트 사용하기
 import AppLayout from './components/AppLayout';
 import MainPage from './components/main/MainPage';
 import configureStore from './store/configureStore';
@@ -32,10 +32,10 @@ class CoinApp extends PureComponent {
                     <RouterStateContainer />
                     <ModalProvider>
                         <AppLayout>
-                            <Routes>
-                                <Route path ="/" element = {<MainPage />} />
-                                <Route path ="*" element = {<NotFound />} />
-                            </Routes>
+                            <Switch>
+                                <Route path ="/" exact render = {() => <MainPage /> }/>
+                                <Route path ="*" component= { <NotFound /> } />
+                            </Switch>
                             <NotificationContainer />
                         </AppLayout>
                     </ModalProvider>

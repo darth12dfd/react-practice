@@ -15,7 +15,9 @@ import reducers from '../reducers';
 import thunk from 'redux-thunk';
 
 import notificationEffects from '../middlewares/notificationEffects';
-import transactionEffects from '../middlewares/transactionEffects';
+//import transactionEffects from '../middlewares/transactionEffects';
+
+import searchFilterEffects from '../middlewares/searchFilterEffects';//12-3-2-2. 스토어 설정 파일에 라우터 미들웨어를 추가한다.
 
 //10-1-1-2. 간단한 미들웨어 만들어 적용하기
 
@@ -73,11 +75,12 @@ const customMiddleware2 = store => nextRunner => action => {
 ////11-1-1-1. redux-pack 스토어 설정 파일에 추가하기
 
 import { middleware as reduxPackMiddleware } from 'redux-pack';
+import routerEffects from '../middlewares/routerEffects';
 
 export default initStates => createStore(
     combineReducers(reducers),
     initStates,
     composeWithDevTools(
-        applyMiddleware(thunk, reduxPackMiddleware,notificationEffects,transactionEffects),
+        applyMiddleware(thunk, reduxPackMiddleware,searchFilterEffects,notificationEffects,routerEffects),
     ),
 );
