@@ -38,10 +38,12 @@ import TransactionPaginationContainer from '../../containers/main/TransactionPag
     이렇게 바꿈으로서 서버 데이터 호출 정보를 포함했던 코드가 사라져 간결해졌으며, 거래 목록 정보를 요청하는 Api 코드를 액션에 담아 공유할 수도 있게 되었다.
 */
 class TransactionList extends PureComponent {
+    /*
     componentDidMount(){
         //Api.get('/transactions').then(({ data }) => this.props.setTransactionList(data));
         this.props.requestTransactionList();//
     }
+    */
 
     render() {
         const { transactions, loading } = this.props;

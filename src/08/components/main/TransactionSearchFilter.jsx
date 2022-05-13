@@ -27,6 +27,8 @@ import Form from '../../../doit-ui/Form';
 
 import Select, { Option } from '../../../doit-ui/Select';
 
+import { withRouter } from 'react-router-dom';
+
 //import Api from '../../Api';
 //import { propTypes } from '../../../doit-ui/Spacing';
 
@@ -47,17 +49,24 @@ class TransactionSearchFilter extends PureComponent {
         const { setTransactionList } = this.props;
         Api.get('./transactions', { params }).then(({ data }) => setTransactionList(data));
         */
-       const { requestTransactionList, setFilter } = this.props;
+       const { setFilter, history } = this.props;
        const cleanedParmas = Object.entries(params)
         .filter(entries => entries[1] !== '')
         .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+        /*
         requestTransactionList(cleanedParmas);
         setFilter(cleanedParmas);
+        */
+       const queryString = Object.entries(cleanedParmas)
+        .map(([key, value]) => `${key}=${value}`)//['code=DOIT', 'price=100']
+        .join('&');//'code=DOIT&price=100'
+        history.push(`/?${queryString}`);
     }
 
     render(){
+        const { initValues } = this.props;
         return (//09-4-1. 검색요청 기능 완성하기
-            <Form onSubmit = {this.handleSubmit}>
+            <Form onSubmit = {this.handleSubmit} initValues={initValues}>
                 <Form.Consumer>
                     {({ onChange, values }) => (
                         <InlineList spacingBetween={2} verticalAlign = "bottom">
@@ -104,4 +113,6 @@ TransactionSearchFilter.propTypes = { setFilter: PropTypes.func };
 //TransactionSearchFilter.propTypes = { setTransactionList: PropTypes.func };
 TransactionSearchFilter.propTypes = { requestTransactionList: PropTypes.func };
 
-export default TransactionSearchFilter;
+//export default TransactionSearchFilter;
+
+export default withRouter(TransactionSearchFilter);

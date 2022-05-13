@@ -28,4 +28,12 @@ import TransactionSearchFilter from '../../components/main/TransactionSearchFilt
 import { requestTransactionList } from '../../actions/transactionPackActions';
 import { setFilter } from '../../actions/searchFilterActions';//11-2-3-2. 데이터 컴포넌트 수정하기
 
-export default connect(null, { requestTransactionList, setFilter })(TransactionSearchFilter);
+
+const mapStateToProps = state => ({
+    initValues: state.searchFilter.params,
+});
+
+//export default connect(null, { requestTransactionList, setFilter })(TransactionSearchFilter);
+export default connect(mapStateToProps, { setFilter } )(TransactionSearchFilter);
+
+
