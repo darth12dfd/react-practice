@@ -12,7 +12,8 @@ import React, { PureComponent } from 'react';
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';//12-1-1.Route 컴포넌트 사용하기
 import AppLayout from './components/AppLayout';
-import MainPage from './components/main/MainPage';
+//import MainPage from './components/main/MainPage';
+import MainPage from '../13/AsyncMainPage';
 import configureStore from './store/configureStore';
 import ModalProvider from './ModalProvider';
 import NotificationContainer from './containers/NotificationContainer';
