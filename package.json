@@ -29,7 +29,6 @@
     "shallow-equal": "^1.2.1"
   },
   "scripts": {
-    "dev": "next",
     "ssrbuild": "next build",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "start": "react-scripts start",

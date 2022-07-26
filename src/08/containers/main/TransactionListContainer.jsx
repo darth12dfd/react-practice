@@ -12,12 +12,15 @@
     containers 폴더에 컴포넌트와 동일한 방법을 폴더를 추가하여 데이터 컴포넌트를 관리한다.
 */
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import TransactionList from '../../components/main/TransactionList';
 //import { setTransactionList } from '../../actions/transactionActions';
 //import { requestTransactionList } from '../../actions/transactionActions';
-import { requestTransactionList, FETCH_TRANSACTION_LIST } from '../../actions/transactionPackActions';
-import { transactionListSelector, loadingStateSelector, transactionListLoadingStateSelector } from '../../selectors/transactionSelectors';
+import { requestTransactionList } from '../../actions/transactionPackActions';
+import {
+  transactionListSelector,
+  transactionListLoadingStateSelector,
+} from '../../selectors/transactionSelectors';
 
 /*
 const mapStateToProps = state => {
@@ -29,13 +32,13 @@ const mapStateToProps = state => {
 };
 */
 
-const mapStateToProps = state => ({
-    transactions: transactionListSelector(state),
-    loading: transactionListLoadingStateSelector(state),
-})
+const mapStateToProps = (state) => ({
+  transactions: transactionListSelector(state),
+  loading: transactionListLoadingStateSelector(state),
+});
 
 const mapDispatchToProps = {
-    requestTransactionList,
+  requestTransactionList,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionList);
