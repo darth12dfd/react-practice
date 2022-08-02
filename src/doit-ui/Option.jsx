@@ -25,7 +25,7 @@ class Option extends PureComponent {
     const { value, label, disabled } = this.props;
 
     return (
-      <option value={value} disabled={disabled}>
+      <option value={value || ''} disabled={disabled}>
         {label || value}
       </option>
     );
