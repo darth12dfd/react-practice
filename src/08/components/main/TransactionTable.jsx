@@ -40,15 +40,17 @@ class TransactionTable extends PureComponent {
         <TableHead>
           <TableRow>
             <TableCell align="left">코인</TableCell>
+            <TableCell align="center">코인 코드</TableCell>
             <TableCell align="center">시가 총액</TableCell>
             <TableCell align="center">현재 시세</TableCell>
             <TableCell align="right">거래 시간</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {transactions.map(({ id, name, totalPrice, currentPrice, datetime }) => (
+          {transactions.map(({ id, name, code, totalPrice, currentPrice, datetime }) => (
             <TableRow key={id}>
               <TableCell>{name}</TableCell>
+              <TableCell align="center">{code}</TableCell>
               <TableCell align="center">{totalPrice}</TableCell>
               <TableCell align="center">{currentPrice}</TableCell>
               <TableCell align="right">{datetime}</TableCell>
@@ -65,6 +67,7 @@ TransactionTable.propTypes = {
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,
+      code: PropTypes.string,
       totalPrice: PropTypes.number,
       currentPrice: PropTypes.number,
       datatime: PropTypes.string,

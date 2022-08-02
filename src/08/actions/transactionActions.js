@@ -14,12 +14,12 @@
 
 /*
 
-export const SET_TRANSACTION_LIST = 'transaction/SET_TRANSACTION_LIST';
+export const SET__LIST = '/SET__LIST';
 
-export function setTransactionList(transactions) {
+export function setList(s) {
     return {
-        type: SET_TRANSACTION_LIST,
-        payload: transactions,
+        type: SET__LIST,
+        payload: s,
     };
 }
 
@@ -32,7 +32,7 @@ export function setTransactionList(transactions) {
 ///10-2-3-3. 가상 코인 거래소에 거래 목록을 요청하는 액션 함수 추가하기
 
 /*
-    서버에 거래 목록을 요청하는 액션 함수 requestTransactionList()를 추가한다. redux-thunk에 의해 함수가 반환하는 값이 객체가 아니라 함수가 된다.
+    서버에 거래 목록을 요청하는 액션 함수 requestList()를 추가한다. redux-thunk에 의해 함수가 반환하는 값이 객체가 아니라 함수가 된다.
 
     그렇기에 Api.get(...) 이후에 dispatch() 를 호출할 수 있다. 즉, 액션에 필요한 지연 작업을 포함할 수 있게 된다.
 */
@@ -41,21 +41,21 @@ export function setTransactionList(transactions) {
 import Api from "../Api";
 
 
-export const SET_TRANSACTION_LIST = 'transaction/SET_TRANSACTION_LIST';
+export const SET__LIST = '/SET__LIST';
 
-export function setTransactionList(transactions){
+export function setList(s){
     return{
-        type: SET_TRANSACTION_LIST,
-        payload: transactions,
+        type: SET__LIST,
+        payload: s,
     };
 }
 
 ///10-2-3-6. 검색을 통해 거래 목록을 불러올 수 있도록 액션 함수 수정하기
 
-export function requestTransactionList(params){
+export function requestList(params){
     return dispatch =>
-        Api.get('/transactions', { params }).then(
-            ({ data }) => dispatch(setTransactionList(data))
+        Api.get('/s', { params }).then(
+            ({ data }) => dispatch(setList(data))
         );
 }
 */
@@ -76,41 +76,41 @@ export function requestTransactionList(params){
 
 import Api from '../Api';
 import { showMessage } from './notificationActions';
-export const LOADING_TRANSACTION_LIST = 'transaction/LOADING_TRANSACTION_LIST';
-export const SET_TRANSACTION_LIST = 'transaction/SET_TRANSACTION_LIST';
-export const SET_ERROR = 'transaction/SET_ERROR';
+export const LOADING__LIST = '/LOADING__LIST';
+export const SET__LIST = '/SET__LIST';
+export const SET_ERROR = '/SET_ERROR';
 
-export function setTransactionList(transactions){
-    return{
-        type: SET_TRANSACTION_LIST,
-        payload: transactions,
-    };
+export function setList(s) {
+  return {
+    type: SET__LIST,
+    payload: s,
+  };
 }
 
-export function requestTransactionList(params){
-    return dispatch =>{
-        dispatch(loading());//loading 액션 함수를 이 안에서 dispatch(loading())과 같이 호출하도록 변경한다.
-        Api.get('/transactions', { params }).then(
-            ({ data }) => dispatch(setTransactionList(data)),
-            error => {
-                dispatch(setError(error.response.data.errorMessage));
-                //dispatch(showMessage(error.response.data.errorMessage, true));
-            },
-        );
-    }
+export function requestList(params) {
+  return (dispatch) => {
+    dispatch(loading()); //loading 액션 함수를 이 안에서 dispatch(loading())과 같이 호출하도록 변경한다.
+    Api.get('/s', { params }).then(
+      ({ data }) => dispatch(setList(data)),
+      (error) => {
+        dispatch(setError(error.response.data.errorMessage));
+        //dispatch(showMessage(error.response.data.errorMessage, true));
+      },
+    );
+  };
 }
 
-export function loading(){
-    return{
-        type: LOADING_TRANSACTION_LIST,
-    };
+export function loading() {
+  return {
+    type: LOADING__LIST,
+  };
 }
 
 export function setError(errorMessage) {
-    return {
-        type: SET_ERROR,
-        payload: { errorMessage },
-    }
+  return {
+    type: SET_ERROR,
+    payload: { errorMessage },
+  };
 }
 
 //10-5. 코인 거래 알림 효과 추가하며 마무리하기
@@ -123,19 +123,19 @@ export function setError(errorMessage) {
 
 ////10-5-1-1. 거래 요청 액션 추가하기
 
-export const TRADE_COMPLETE = 'transaction/TRADE_COMPLETE';
+export const TRADE_COMPLETE = '/TRADE_COMPLETE';
 
 export function tradeComplete() {
-    return { type: TRADE_COMPLETE };
+  return { type: TRADE_COMPLETE };
 }
 
-export function createTransaction(data, onComplete) {
-    return dispatch =>
-      Api.post('/transactions', data).then(
-        ({ data }) => {
-          dispatch(tradeComplete());
-          onComplete();
-        },
-        error => dispatch(setError(error.response.data.errorMessage)),
-      );
-  }
+export function create(data, onComplete) {
+  return (dispatch) =>
+    Api.post('/s', data).then(
+      ({ data }) => {
+        dispatch(tradeComplete());
+        onComplete();
+      },
+      (error) => dispatch(setError(error.response.data.errorMessage)),
+    );
+}

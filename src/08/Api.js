@@ -22,10 +22,11 @@
 
 ///09-2-2-5. 자주 사용하는 API 프로젝트에 등록하기
 
-import axios from "axios";
+import axios from 'axios';
 
+const isDev = process.env.NODE_ENV === 'development';
 const Api = axios.create({
-    baseURL: 'http://localhost:4000/',
+  baseURL: isDev ? 'http://localhost:4000/' : '/api/',
 });
 
 export default Api;
