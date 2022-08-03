@@ -1,5 +1,5 @@
 const functions = require('firebase-functions');
-const apiserver = require('./apiserver');
+const apiserver = require('./apiserver').default;
 
 exports.apiserver = functions.https.onRequest(apiserver);
 // // Create and Deploy Your First Cloud Functions
