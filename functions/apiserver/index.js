@@ -1,20 +1,20 @@
 //13-5. 파이어베이스 DB 연결하기
 
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-const express = require('express');
-const bodyParser = require('body-parser');
-const moment = require('moment');
+import { config } from 'firebase-functions';
+import { initializeApp, firestore } from 'firebase-admin';
+import express from 'express';
+import { json, urlencoded } from 'body-parser';
+import moment from 'moment';
 
-admin.initializeApp(functions.config().firebase);
+initializeApp(config().firebase);
 
-const db = admin.firestore();
+const db = firestore();
 const app = express();
 const main = express();
 
 main.use('/api', app);
-main.use(bodyParser.json());
-main.use(bodyParser.urlencoded({ extended: false }));
+main.use(json());
+main.use(urlencoded({ extended: false }));
 
 app.post('/transactions', (req, res) => {
   const currentPrice = parseInt(req.body.currentPrice.replace(/[^0-9]+/g, ''));
@@ -24,7 +24,7 @@ app.post('/transactions', (req, res) => {
     ...req.body,
     currentPrice,
     totalPrice: currentPrice * amount,
-    datetime: admin.firestore.FieldValue.serverTimestamp(),
+    datetime: firestore.FieldValue.serverTimestamp(),
   };
 
   db.collection('transactions')
@@ -113,4 +113,4 @@ app.get('/transactions', (req, res) => {
     res.status(200).send(data.slice(_limit * (page - 1)));
   });
 });
-module.exports = main;
+export default main;
