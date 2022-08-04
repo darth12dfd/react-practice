@@ -16830,7 +16830,7 @@ var useStore = /*#__PURE__*/createStoreHook();
 /*!**********************************************!*\
   !*** ./node_modules/react-redux/es/index.js ***!
   \**********************************************/
-/*! exports provided: batch, Provider, connectAdvanced, ReactReduxContext, connect, useDispatch, createDispatchHook, useSelector, createSelectorHook, useStore, createStoreHook, shallowEqual */
+/*! exports provided: Provider, connectAdvanced, ReactReduxContext, connect, useDispatch, createDispatchHook, useSelector, createSelectorHook, useStore, createStoreHook, shallowEqual, batch */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
