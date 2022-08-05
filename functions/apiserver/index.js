@@ -1,32 +1,30 @@
 //13-5. 파이어베이스 DB 연결하기
 
-import { config } from 'firebase-functions';
-import { initializeApp, firestore } from 'firebase-admin';
-import express from 'express';
-import { json, urlencoded } from 'body-parser';
-import moment from 'moment';
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+const express = require('express');
+const bodyParser = require('body-parser');
+const moment = require('moment');
 
-initializeApp(config().firebase);
+admin.initializeApp(functions.config().firebase);
 
-const db = firestore();
+const db = admin.firestore();
 const app = express();
 const main = express();
 
 main.use('/api', app);
-main.use(json());
-main.use(urlencoded({ extended: false }));
+main.use(bodyParser.json());
+main.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/transactions', (req, res) => {
   const currentPrice = parseInt(req.body.currentPrice.replace(/[^0-9]+/g, ''));
   const amount = req.body.amount;
-
   const data = {
     ...req.body,
     currentPrice,
     totalPrice: currentPrice * amount,
-    datetime: firestore.FieldValue.serverTimestamp(),
+    datetime: admin.firestore.FieldValue.serverTimestamp(),
   };
-
   db.collection('transactions')
     .add(data)
     .then((doc) => {
@@ -45,7 +43,6 @@ app.post('/transactions', (req, res) => {
         });
     });
 });
-
 app.get('/transactions/:id', (req, res) => {
   db.collection('transactions')
     .doc(req.params.id)
@@ -61,7 +58,6 @@ app.get('/transactions/:id', (req, res) => {
       }
     });
 });
-
 app.get('/transactions', (req, res) => {
   const { code, currentPrice_gte, currentPrice_lte, _page, _limit } = [
     'code',
@@ -113,4 +109,4 @@ app.get('/transactions', (req, res) => {
     res.status(200).send(data.slice(_limit * (page - 1)));
   });
 });
-export default main;
+module.exports = main;

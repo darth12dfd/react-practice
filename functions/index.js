@@ -1,11 +1,13 @@
 const functions = require('firebase-functions');
-const apiserver = require('./apiserver').default;
+const next = require('next');
+const apiserver = require('./apiserver');
+
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev, conf: { distDir: 'next' } });
+const handle = app.getRequestHandler();
 
 exports.apiserver = functions.https.onRequest(apiserver);
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+
+exports.next = functions.https.onRequest((req, res) => {
+  return app.prepare().then(() => handle(req, res));
+});
